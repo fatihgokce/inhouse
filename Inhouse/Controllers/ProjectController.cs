@@ -15,7 +15,7 @@ namespace Inhouse.Controllers
 
         public ActionResult ListProject(string lang)
         {
-            //CanUserVisit();
+            CanUserVisit();
             AssignLang(lang);
 
             return View();

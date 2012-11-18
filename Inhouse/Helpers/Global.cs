@@ -14,7 +14,7 @@ namespace Inhouse.Helpers
             try
             {
                 RepositorySetting setting = new RepositorySetting();
-
+                
                 var mailMessage = new MailMessage(setting["SMTPUsername"], setting["EmailAddress"])
                 {
                     Subject = contact.Mail + " den ",
