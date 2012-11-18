@@ -1,0 +1,33 @@
+﻿@using Microsoft.Web.Mvc;
+@using Inhouse.Helpers;
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+   <meta charset="utf-8" />
+   <meta name="description" content=@Html.MetaDescription() /> 
+   <meta name="keywords" content=@Html.MetaKeyboard()  />    
+        <title>@ViewBag.Title</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @*<script src="http://code.jquery.com/jquery-latest.min.js"></script>  *@
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <link href="/plugins/popup/css/styles.css" rel="stylesheet" />
+        @RenderSection("css",false)
+  <style type='text/css'>
+  </style>
+    </head>
+    <body>
+   
+        @Html.Partial("Header")
+           <div class="content-wrapper clear-fix">
+           @RenderBody()
+         </div>
+              @*    @RenderSection("featured", required: false)*@
+        @Html.Partial("Footer")    
+       
+     
+     @*   @RenderSection("scripts", required: false)*@	
+    </body>
+</html>

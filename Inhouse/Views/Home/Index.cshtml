@@ -1,0 +1,158 @@
+﻿@using Inhouse.Models;
+@using Inhouse.Repositorys;
+@using Inhouse.Helpers;
+@using Inhouse.Extensions;
+@{
+    ViewBag.Title =@ViewBag.Title;
+}
+@{
+    RepositoryLabel _repLab = new RepositoryLabel();
+ }
+@section css{
+<!-- Include the jQuery library (local or CDN) -->
+ 
+}
+@{
+    string lang = ViewBag.Lang as string;
+ }
+               <div style="width:960px;margin-top:10px" class="clear-fix">
+             
+                   @Html.WriteSlide()
+               </div>
+<div class="clear-fix">
+   
+</div>
+
+     <div style="width:100%;height:1px;margin-top:20px;background-image:url(Content/images/home_09.png)">
+        </div>
+            <div class="clear-fix">
+                <p style="margin-top:30px;line-height:5px;text-align:center;color:#005fc3;font-family:Calibri;font-size:29px;font-weight:bold;">
+               @{ if(lang=="tr"){
+                  <text>@_repLab.GetByKey(LabelKeys.MainPageSlogan).ValueTr.ReplaceIfNotNull("''","'").ReplaceIfNotNull("@","@@")</text> 
+               
+            }else{
+             <text>@_repLab.GetByKey(LabelKeys.MainPageSlogan).ValueEn.ReplaceIfNotNull("''","'").ReplaceIfNotNull("@","@@")</text> 
+            }
+           }
+                 
+                </p>
+                <p style="text-align:center;line-height:18px;color:#000000;font-family:Calibri;font-size:16px;margin:auto;margin-top:15px;width:800px">                  
+                       @{ if(lang=="tr"){
+                @_repLab.GetByKey("MainPageSlogan2").ValueTr.ReplaceIfNotNull("''","'").ReplaceIfNotNull("@","@@")               
+                          }
+                          else{
+             @_repLab.GetByKey("MainPageSlogan2").ValueEn.ReplaceIfNotNull("''","'").ReplaceIfNotNull("@","@@") 
+              }
+           }
+        
+                </p>
+            </div>
+               <div style="width:100%;height:1px;margin-top:18px;background-image:url(Content/images/home_09.png)">
+        </div>
+        @*   </div>*@
+      @*  <div class="content-wrapper">*@
+            <div class="descption*box" style="background-color:#005fc3;height:30px;margin-top:20px;">
+                <p style="padding:7px 0 0 14px;font-family:Calibri;font-size:17px;color:#ffffff;">
+                       @{ if(lang=="tr"){
+                @_repLab.GetByKey("LastProject").ValueTr.ReplaceIfNotNull("''","'").ReplaceIfNotNull("@","@@") 
+               
+            }else{
+             @_repLab.GetByKey("LastProject").ValueEn.ReplaceIfNotNull("''","'").ReplaceIfNotNull("@","@@") 
+            }
+           }
+                </p>
+            </div>
+            <div id="project-list" class="clear-fix">
+                <ul>
+                    <li>
+                        <div style="">
+                            <img src="~/Content/images/home_17.jpg"/>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje1</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                            <img src="~/Content/images/home_19.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje2</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                            <img src="~/Content/images/home_21.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje3</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                            <img src="~/Content/images/home_23.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje3</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                </ul>
+            </div>
+       @* </div>*@
+
+<script src="/Scripts/jquery.cycle.all.min.js"></script>
+	<script type="text/javascript"> 
+
+	    jQuery.noConflict();	
+	    jQuery(".js #featured, .js div#tabbed").css("display","block");	
+	    var $featured_content = jQuery('#featured_content'),
+			$tabbed_area = jQuery('div#tabbed'),
+			$controllers = jQuery('div#controllers'),
+			$comments = jQuery('ol.commentlist');		
+
+	    if ($featured_content.length) {
+
+	        $featured_content.cycle({
+	            timeout: 5000,
+	            speed: 300,
+	            cleartypeNoBg: true,
+	            //prev:   'a#left_arrow',
+	            //next:   'a#right_arrow',
+	            pager:  'div#controllers',
+	            fx: 'fade'
+	        });
+
+			
+
+	        var controllersWidth = $controllers.width(),
+
+		controllersLeft = Math.round((960 - controllersWidth) / 2);
+	        console.log("cont left:" + controllersLeft);
+	      //  if (controllersWidth < 960) $controllers.css('padding-left',controllersLeft);
+
+	    }
+
+		
+
+	    if ($tabbed_area.length) {
+	        $tabbed_area.tabs({ fx: { opacity: 'toggle' } });
+
+	    };
+
+	</script>

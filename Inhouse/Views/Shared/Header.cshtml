@@ -1,0 +1,68 @@
+﻿
+@using Microsoft.Web.Mvc;
+@using Inhouse.Helpers;
+@using Inhouse.Controllers;
+@{
+    string lang = ViewBag.Lang as string;
+}
+<header class="clear-fix">
+    <div class="content-wrapper clear-fix">
+        <div class="float-left" style="width: 118px">
+       <a href="/"><img src="~/Content/images/home_03.png" /></a>
+        </div>
+        <div style="float: left; width: 842px; height: 118px" id="header-right-wrapper">
+
+@Html.WriteNav(lang)
+        @*    <div id="menu" style="float: right; margin-top: 50px" class="clear-fix">
+                <ul>
+
+                    <li class="main_li"><a href="/">Ana Sayfa</a>
+                        <ul>
+                            <li class="point_li">
+                                <img src="~/Content/images/home_06.png" alt="" /></li>
+                        </ul>
+                    </li>
+                    <li class="main_li"><a href="#">Inhouse</a>
+                        <ul>
+                            <li><a href="#">Kurumsal</a></li>
+                            <li><a href="#">Faaliyet Alanları</a></li>
+                            <li><a href="#">Referanlar</a></li>
+                            <li class="point_li">
+                                <img src="~/Content/images/home_06.png" alt="" /></li>
+                        </ul>
+                    </li>
+                    <li class="main_li">@Html.ActionLink("Projeler", "ListProject", "Project", new { lang=lang},null)
+                        <ul>
+                            <li class="point_li">
+                                <img src="~/Content/images/home_06.png" alt="" /></li>
+                        </ul>
+                    </li>
+                    <li class="main_li">@Html.ActionLink("Kariyer", "Index", "Career",new { lang=lang},null)
+                        <ul>
+                            <li class="point_li">
+                                <img src="~/Content/images/home_06.png" alt="" /></li>
+                        </ul>
+                    </li>
+                    <li class="main_li">@Html.ActionLink("İletişim", "Index", "Contact",new { lang=lang},null)
+                        <ul>
+                            <li class="point_li">
+                                <img src="~/Content/images/home_06.png" alt="" /></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>*@
+
+            <div style="width: 100%; height: 1px; margin-top: 85px; background-image: url(/Content/images/home_09.png)">
+            </div>
+            <div style="width: 100%;" id="language">
+                @*   <ul class="clear-fix">
+            <li >
+            <a href="/"  id="lang_bar">Eng</a></li>
+            <li><img src="~/Content/images/ok.png" style="margin-top:4px" /></li>
+        </ul>*@
+                @Html.WriteLangNav(ViewBag.Lang as string)
+            </div>
+        </div>
+
+    </div>
+</header>

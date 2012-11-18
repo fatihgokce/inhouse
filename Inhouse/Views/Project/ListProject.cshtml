@@ -1,0 +1,347 @@
+﻿@using Microsoft.Web.Mvc;
+@using Inhouse.Helpers;
+@using Inhouse.Controllers;
+@using Inhouse.Repositorys;
+@using Inhouse.Models;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <style>
+   div.popup {
+    border:solid 2px #f00;
+    padding:20px;
+    width:200px;
+    height:40px;
+    line-height:40px;
+    text-align:center;
+    display:none;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-40px 0 0 -120px;
+    background-color:#e0e0e0;
+    -moz-box-shadow: 0 0 20px black;
+    -webkit-box-shadow: 0 0 20px black;
+    -o-box-shadow: 0 0 20px black;
+    box-shadow: 0 0 20px black;
+
+   }​ 
+</style>
+    }
+@{
+ string lang=ViewBag.Lang as string;   
+ }
+@functions{
+public IHtmlString GetbyKeyAndLang(string key,string lang)
+{
+     RepositoryLabel repLabel = new RepositoryLabel();
+     Label label = repLabel.GetByKey(key);
+    if(lang=="tr"){
+        return Html.Raw(label.ValueTr) ;
+    }else{
+        return Html.Raw(label.ValueEn);
+    }
+}
+}
+<p>		        
+  
+
+    
+    </p>
+   <div class="descption-box" style="background-color:#005fc3;height:30px;margin-top:20px;">
+                <p style="padding:7px 0 0 14px;font-family:Calibri;font-size:17px;color:#ffffff;">@GetbyKeyAndLang("LastProject",lang)</p>
+            </div>
+<div id="project-list" class="clear-fix">
+                <ul>
+                    <li>
+                        <div style="">
+            
+   <a href="/tr/Detail"><img src="~/Content/images/home_19.jpg" /></a>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje1</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                   <a href="/tr/Detail"><img src="~/Content/images/home_19.jpg" /></a>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje2</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                            <img src="~/Content/images/home_21.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje3</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                            <img src="~/Content/images/home_23.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje3</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                </ul>
+      <ul>
+                    <li>
+                        <div style="">
+                            <img src="~/Content/images/home_17.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje1</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                            <img src="~/Content/images/home_19.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje2</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                            <img src="~/Content/images/home_21.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje3</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                    <li class="li-left">
+                        <div style="">
+                            <img src="~/Content/images/home_23.jpg" />
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-family:Calibri;font-size:16px;color:#464646">Proje3</p>
+                        </div>
+                        <div>
+                            <p style="text-align:center;font-size:13px;color:#464646">Lorem / Ipsum</p>
+                        </div>
+                        <div class="blue-hori"></div>
+                    </li>
+                </ul>
+            </div>
+<div id="modal">
+    <div style="width:100%;background-color:#ffffff" class="clear-fix">
+    <div class="clear-fix" style="margin-top:20px;margin-left:20px;width:450px">
+        <div style="float:left">
+            <p style="color:#005fc3;font-size:18px;font-weight:bold;">
+      @GetbyKeyAndLang("HeaderPopup",lang)
+            </p>
+        </div>
+        <div style="float:right;margin-top:-15px;cursor:pointer;">
+            <img src="~/Content/images/pop-up_03.png" class="close" />
+        </div>
+    </div>
+     <div style="width:100%;height:1px;margin-top:16px;background-image:url(/Content/images/home_09.png)"> </div>
+<div style="margin-top:20px;" id="popup-left" class="contact-list">
+      <ul class="clear-fix">
+            <li>
+                <p class="career-label-name">
+                   @GetbyKeyAndLang("NameSurname",lang)
+                </p>
+             
+            </li>
+            <li>
+<div class="box-input2">
+     <input type="text" value="" name="name_surname" id="name_surname"  />
+        </div>
+            </li>
+            <li>
+           
+            </li>
+        </ul>
+        <ul class="box-form-row clear-fix">
+            <li>
+                <p class="career-label-name">
+                    @GetbyKeyAndLang("Mail",lang)
+                </p>
+             
+            </li>
+            <li>
+<div class="box-input2">
+     <input type="text" value="" name="email" id="email"  />
+        </div>
+            </li>
+            <li>
+                
+            </li>
+        </ul>
+        <ul class="box-form-row clear-fix">
+            <li>
+                <p class="career-label-name">
+                    @GetbyKeyAndLang("Phone",lang)
+                </p>
+             
+            </li>
+            <li>
+<div class="box-input2">
+     <input type="text" value="" name="phone" id="phone" />
+        </div>
+            </li>
+            <li>
+            </li>
+        </ul>
+      <ul class="box-form-row clear-fix">
+            <li>
+                <p class="career-label-name">
+                   &nbsp;
+                </p>
+             
+            </li>
+            <li>
+                <div style="margin-left:10px;width:359px;">
+                     <input type="button" id="btn_show_projects" value="@GetbyKeyAndLang("ShowProjects",lang)" style="width:150px !important;outline:none;border:0;margin:0;padding:0;" />
+                </div>
+          
+   
+            </li>
+            <li>
+               @* <img src="~/Content/images/pop-up_10.png" style="margin:10px 0 0 10px" />*@
+            </li>
+        </ul>
+    </div>
+	 <div style="width:100%;height:1px;margin-top:16px;background-image:url(/Content/images/home_09.png)"> </div>
+        <div style="margin-top:10px">
+            <p class="note">@GetbyKeyAndLang("NotePopup",lang)
+            </p>
+        </div>
+  </div>
+</div>
+@*<div id="item-added" class="popup">
+    Item has been added to the cart.
+</div>*@
+<!--jQuery-->
+<script src="~/plugins/popup/js/jquery.reveal.js"></script>
+	<script type="text/javascript">
+          
+           $(document).ready(function () {
+        
+               var isVisit="@ViewBag.IsVisit";
+              
+               if(isVisit=="false"){
+                   $('#modal').reveal({ // The item which will be opened with reveal
+                       animation: 'fade',                   // fade, fadeAndPop, none
+                       animationspeed: 600,                       // how fast animtions are
+                       closeonbackgroundclick: false,              // if you click background will modal close?
+                       dismissmodalclass: 'close'    // the class of a button or element that will close an open modal
+                   });
+               }
+	      
+	       });
+        
+                       
+            
+	  
+	    //$('a.add-item').click(function(){
+	    //    $('#item-added').show();
+	    //    $('#item-added').delay(3000).fadeOut();
+	    //});​
+	    function validateEmail() {
+	        //testing regular expression
+	        var a = $("#email").val();
+	        var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+	        //if it's valid email
+	        if (filter.test(a)) {
+	            $("#email").parent().parent().next().html('<img src="/Content/images/pop-up_10.png" style="margin: 10px 0px 0px 10px; "/>')
+	            return true;
+	        }
+	            //if it's NOT valid
+	        else {
+	            $("#email").parent().parent().next().html('<img src="/Content/images/pop-up_07.jpg" style="margin: 10px 0px 0px 10px; "/>')
+	            return false;
+	        }
+	    }
+		function validateName(){
+		    //if it's NOT valid		  
+		    if($(name_surname).val().length < 5){
+		        $("#name_surname").parent().parent().next().html('<img src="/Content/images/pop-up_07.jpg" style="margin: 10px 0px 0px 10px; "/>')
+		        return false;
+		    }
+		        //if it's valid
+		    else{
+		        $("#name_surname").parent().parent().next().html('<img src="/Content/images/pop-up_10.png" style="margin: 10px 0px 0px 10px; "/>')
+		        return true;
+		    }
+		}
+		function validatePhone() {
+		    //if it's NOT valid		  
+		    if ($(phone).val().length < 5) {
+		        $("#phone").parent().parent().next().html('<img src="/Content/images/pop-up_07.jpg" style="margin: 10px 0px 0px 10px; "/>')
+		        return false;
+		    }
+		        //if it's valid
+		    else {
+		        $("#phone").parent().parent().next().html('<img src="/Content/images/pop-up_10.png" style="margin: 10px 0px 0px 10px; "/>')
+		        return true;
+		    }
+		}
+		$(function(){
+		  
+		    var name_surname = $("#name_surname");	       
+		    var email = $("#email");
+		    var phone = $("#phone");
+		    name_surname.blur(validateName);
+		    name_surname.keyup(validateName);
+		    email.blur(validateEmail);
+		    email.keyup(validateEmail);
+		    phone.blur(validatePhone);
+		    phone.keyup(validatePhone);
+           
+		    $("#btn_show_projects").click(function () {
+		        if (validateEmail() && validateName() && validatePhone()) {
+		            var url = "@Url.Action("InsertContact", "Project")";
+		            url += "?name_surname=" + name_surname.val() + "&" + "email=" + email.val() + "&phone=" + phone.val();
+		            console.log("url:" + url);
+		            $.post(url, { name_surname: name_surname.val(), email: email.val(), phone: phone.val() }, function (data) {
+		                if (data.Success == true) {
+		                    $("#modal").trigger('reveal:close');
+		                }
+		                else {
+		                    // alert("Error: " + obj.Message);
+		                }
+
+		            });
+		        }
+
+		       
+
+		    });
+		});
+  
+	</script>
+

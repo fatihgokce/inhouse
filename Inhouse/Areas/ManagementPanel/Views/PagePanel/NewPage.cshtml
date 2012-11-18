@@ -1,0 +1,115 @@
+﻿@model Inhouse.Models.Page
+@using Inhouse.Models;
+@using Inhouse.Repositorys;
+@using Inhouse.Helpers;
+@using System.Web.Mvc;
+@using Microsoft.Web.Mvc;
+@using Inhouse.Areas.ManagementPanel.Controllers;
+@{
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_LayoutPage1.cshtml";
+}        
+
+ <h2>@ViewBag.Title</h2>
+ @Html.ValidationSummary("lütfen hataları düzeltin ve tekrar deneyin.")
+  <div id="main_content">     
+    <div id="admin_header">
+    	<div class="admin_addoffer_title"></div>
+        
+        <div class="right_buttons">       	
+
+          <div class="right_button">
+          @(Html.ActionLink<PagePanelController>(c => c.ListPage(), "Sayfa AnaSayfa"))
+       
+          </div>
+        
+        </div>
+    
+    </div>
+    <div id="admin_header_border"></div>   
+<div id="haberForm" style="border:1px dotted #ccc;width:990px;">
+  <script src="/Scripts/MicrosoftAjax.js" type="text/javascript"></script>
+  <script src="/Scripts/MicrosoftMvcValidation.js" type="text/javascript"></script>
+
+ @using (Html.MultipartForm())
+ { 
+  <fieldset>
+  <ol>
+  <li>
+  @Html.HiddenFor(x => x.PageId)
+  </li>
+   <li style="margin-bottom:5px;margin-top:5px">
+    <label>Sayfa ismi Tr * </label></li>
+      <li>   
+    @Html.TextBoxFor(x =>x.PageNameTr)
+    @Html.ValidationMessageFor(x => x.PageNameTr)
+    </li>
+      <li style="margin-bottom:5px;margin-top:5px">
+    <label>Sayfa ismi En * </label></li>
+      <li>   
+    @Html.TextBoxFor(x =>x.PageNameEn)
+    @Html.ValidationMessageFor(x => x.PageNameEn)
+    </li>
+     <li style="margin-bottom:5px;margin-top:5px">
+    <label>Kategori * </label></li>
+      <li>   
+    @Html.DropDownListFor(x => x.PageId, ViewBag.Pages  as SelectList, new { style = "width:150px;" })
+    @Html.ValidationMessageFor(x=>x.PageId)
+    </li>
+      @* <li style="margin-bottom:5px;margin-top:5px">*@
+    @*<label>Sıra * </label></li>
+      <li>   
+    @Html.TextBoxFor(x =>x.Position)
+    @Html.ValidationMessageFor(x => x.Position)
+    </li>*@
+    <li style="margin-bottom:5px;margin-top:5px">
+    <label>Aktif </label></li>  
+   <li>   
+    @Html.CheckBoxFor(x =>x.Active)   
+    </li>
+    <li style="margin-bottom:5px;margin-top:5px">
+    <label>Sayfa içerik Tr* </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.ContextTr, new { cols = "80", rows = "15" })
+    @Html.ValidationMessageFor(x => x.ContextTr)
+    </li>   
+       <li style="margin-bottom:5px;margin-top:5px">
+    <label>Sayfa içerik En* </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.ContextEn, new { cols = "80", rows = "15" })
+    @Html.ValidationMessageFor(x => x.ContextEn)
+    </li>   
+    <li>
+    <ul>
+    <li style="display:inline">
+    <input type="submit" value="Kaydet" />
+    </li>
+    <li style="display:inline"><input type="button" value="iptal" class="kapatForm" /></li>
+    </ul>
+    </li>
+  </ol>
+
+  </fieldset>     
+ }
+  </div> 
+  </div>
+ @Html.Partial("Editor")
+ <script type="text/jscript">
+     var parentId = @ViewBag.parentId;
+     if (parentId) {
+         init();
+     }
+     function init() {
+         MakeSelectedSelect(parentId);
+     }
+     function MakeSelectedSelect(selectedValue) {
+
+         $("#PageId option").each(function () {
+
+             //   alert($(this).val());
+             if ($(this).val() == selectedValue) {
+
+                 $(this).attr('selected', 'selected');
+             }
+         });
+     }
+ </script>

@@ -1,0 +1,145 @@
+﻿@model Inhouse.Models.Label
+@using Inhouse.Models;
+@using Inhouse.Repositorys;
+@{
+    ViewBag.Title = "ListLabel";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div id="haberForm" style="display:none;border:1px dotted #ccc;width:300px;">
+  <script src="/Scripts/MicrosoftAjax.js" type="text/javascript"></script>
+  <script src="/Scripts/MicrosoftMvcValidation.js" type="text/javascript"></script>
+
+ @using (Html.BeginForm())
+     { 
+  <fieldset>
+  <ol>
+  <li>
+    <label>Etiket ismi *: </label>
+    @Html.TextBoxFor(x=>x.Key)
+    @Html.ValidationMessageFor(x=>x.Key)
+    </li>
+<li>
+    <label>Türkçe Değeri *: </label>
+    @Html.TextBoxFor(x=>x.ValueTr)
+    @Html.ValidationMessageFor(x=>x.ValueTr)
+    </li>
+      <li>
+    <label>İngilizce Değeri *: </label>
+    @Html.TextBoxFor(x=>x.ValueEn)
+    @Html.ValidationMessageFor(x=>x.ValueEn)
+    </li>
+    <li>
+    <ul>
+    <li style="display:inline">
+    <input type="submit" value="Kaydet" />
+    </li>
+    <li style="display:inline"><input type="button" value="iptal" class="kapatForm" /></li>
+    </ul>
+    </li>
+  </ol>
+
+  </fieldset>     
+   }
+  </div> 
+    <div style="padding:5px;">
+   <a href="javascript:void(0)" class="yeniKayit" style="text-decoration:underline">Yeni Kayit</a> 	
+   </div>
+
+ <div id="main_content">  
+    <div id="admin_header">
+    	<div class="admin_index_title">Etiket</div>        
+        
+    
+    </div>
+    <div id="admin_header_border"></div>   
+ @using (Html.BeginForm())
+ { 	
+ <div class="grid">
+ 
+                <table cellspacing="0" cellpadding="0" id="tbusers">
+                    <tr>                   	
+                        <th style="width:5px;"><a href="#" class="pink">Etiket ismi</a></th>
+                        <th style="width:20px;"><a href="#" class="pink">Etiket Tr değer</a></th>   
+                        <th style="width:20px;"><a href="#" class="pink">Etiket En değer</a></th>                                    
+                        <th style="width:15px;"><a href="javascript:void(0)" class="pink"></a></th>
+                                      
+                    </tr>
+                    @{ 
+                        int i = 1;
+                        RepositoryLabel _repLabel = new RepositoryLabel();
+                        var _users = _repLabel.GetAll();
+                     }
+                   @foreach (var item in _users) {  
+                    string cssClass = "";
+                    if (i % 2 == 1)
+                    { cssClass = "odd"; }
+                    else
+                    {
+                        cssClass = "even";
+                        i++;
+                    }
+                    
+                    <tr class="@cssClass">
+                      <td>@item.Key</td>
+                      <td>@item.ValueTr</td>                       
+                       <td>@item.ValueEn</td>    
+                        <td>     
+                          <a href="javascript:void(0)" class="guncelle">Güncelle</a>
+                         <a href="javascript:void(0)" class="delete">Sil</a>
+                        </td>      
+                            
+                    </tr>			
+                    }           
+                                                                                                                 
+                </table>
+       
+        </div>      
+        }       
+	</div>
+    <script language="javascript" type="text/javascript">
+    jQuery(document).ready(function () {
+        $(".delete").click(function () {
+            var tr = $(this).parents("tr");
+            var id = $(tr).children("td:eq(0)").text();
+            var result = confirm("Silmek istediğinizden eminmisiniz?");
+            if (result) { 
+             var url= "@Url.Action("Delete",new{id=""})";
+            //alert(url);
+            url=url+"/"+id;
+             submitform(url);
+            }
+        });
+        $(".yeniKayit").click(function () {
+            yeniKayit();
+            $("#haberForm").css("display", "block");
+        });
+        $(".kapatForm").click(function () {
+            yeniKayit();
+            $("#haberForm").css("display", "none");
+        });
+        $(".guncelle").click(function () {
+            $("#haberForm").css("display", "block");
+            var tr = $(this).parents("tr");
+            var id =$(tr).children("td:eq(0)").text();
+            var bas = $(tr).children("td:eq(1)").text();
+          var pas = $(tr).children("td:eq(2)").text();
+            $("#Key").val(id);
+            $("#ValueTr").val(jQuery.trim(bas));   
+             $("#ValueEn").val(jQuery.trim(pas));               
+        });
+    });
+    
+    function yeniKayit() {     
+     $("#Key").val("");
+            $("#ValueTr").val("");   
+             $("#ValueEn").val("");     
+             
+    }
+    function submitform(url) {
+        document.forms[1].action = url;
+        document.forms[1].submit();
+    }
+ 
+</script>
+    

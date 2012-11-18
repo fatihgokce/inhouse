@@ -1,0 +1,108 @@
+﻿@model List<Inhouse.Models.Proje>
+@using Inhouse.Models;
+@using Inhouse.Repositorys;
+@using Inhouse.Helpers;
+@using Microsoft.Web.Mvc;
+@using Inhouse.Areas.ManagementPanel.Controllers;
+@{
+    ViewBag.Title = "ListProje";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>ListProje</h2>
+ <div style="padding:5px;">
+ @(Html.ActionLink<ProjePanelController>(x => x.NewProje(),"Yeni Proje"))
+   </div>
+ <div class="grid">
+ 
+                <table cellspacing="0" cellpadding="0" id="tbusers">
+                    <tr>                   	
+                        <th style="width:2%;"><a href="#" class="pink">ID</a></th>
+                         <th style="width:3%;"><a href="#" class="pink">ProjeAdiTr</a></th>   
+                        <th style="width:10%;"><a href="#" class="pink">Il</a></th>   
+                        <th style="width:10%;"><a href="#" class="pink">Ilce</a></th>   
+                        <th style="width:10%;"><a href="#" class="pink">Tarih</a></th>    
+                        <th style="width:10%;"><a href="#" class="pink">Ürün Resmi1</a></th>                                                           
+                        <th style="width:5%;"><a href="javascript:void(0)" class="pink"></a></th>
+                                      
+                    </tr>
+                    @{ 
+                        int i = 1;
+                        //RepositoryProje _repNews = new RepositoryProje();
+                        //var _prds = _repNews.GetAll();
+                        PaginatedList pager = ViewBag.Pager as PaginatedList;
+                     }
+                   @foreach (var item in Model)
+                   {
+                       string cssClass = "";
+                       if (i % 2 == 1)
+                       { cssClass = "odd"; }
+                       else
+                       {
+                           cssClass = "even";
+                           i++;
+                       }
+                    
+                    <tr class="@cssClass">
+                      <td>@item.ProjeId</td>
+                       <td>@item.ProjeAdiTr</td>
+                      @*<td>                  
+                         @{
+                       string name = item.ContextTr;
+                       if (!string.IsNullOrEmpty(item.ContextTr) && item.ContextTr.Length >= 35)
+                       {
+                           name = name.Substring(0, 35);
+                           name += " ...";
+                       }
+                   }
+                        @name   
+                      </td>                       *@                     
+                         <td>@item.Il</td>
+                       <td>@item.Ilce</td>  
+                        <td>@item.Tarih.ToString()</td>               
+                       <td><img src="@Html.MiddlePath(item.PicturePath1)" width="202px" height="120px" alt="" /> </td>
+                          
+                        <td>     
+                   @(Html.ActionLink<ProjePanelController>(x => x.UpdateProje(item.ProjeId), "Güncelle"))
+                      
+                   @(Html.ActionLink<ProjePanelController>(x => x.Delete(item.ProjeId), "Sil", new { @class="delete"}))
+
+                        </td>        
+                            
+                    </tr>			
+                   }           
+                                                                                                                 
+                </table>
+     @if (@pager.TotalCount > 0)
+{ 
+     @Html.Pager(pager, ViewData["queryData"] as string, (int? page, HtmlHelper htmlHelper, string queryData) =>
+                            string.Format("{0}", this.Html.BuildUrlFromExpressionFG<ProjePanelController>(c => c.ListProje(page))))
+}   
+       
+        </div>     
+<script type="text/javascript">
+    $(function(){
+        $(".delete").click(function () {
+            //var tr = $(this).parents("tr");
+            //var id = parseInt($(tr).children("td:eq(0)").text());
+            var result = confirm("Silmek istediğinizden eminmisiniz?");
+            if (result) {
+                 @*var url = "@Url.Action("Delete",new{id=""})";
+                //alert(url);
+                url = url + "/" + id;
+                console.log("url:"+url);
+                submitform(url);*@
+            
+                return true;
+            } else
+                return false;
+        });
+    });
+  
+    function submitform(url) {
+        document.forms[0].action = url;
+        document.forms[0].submit();
+    }
+ 
+</script>
+   

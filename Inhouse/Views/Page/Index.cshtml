@@ -1,0 +1,63 @@
+﻿@model Inhouse.Models.Page
+@using Inhouse.Controllers;
+@using Microsoft.Web.Mvc;
+@using System.Web.Mvc; 
+@using Inhouse.Extensions;
+@using System.Web;
+@using System;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    string lang = ViewBag.Lang as string;
+    List<Inhouse.Models.Page> childPages = ViewBag.ChildPages as List<Inhouse.Models.Page>;
+ }
+@functions{
+public IHtmlString GetData(Inhouse.Models.Page item,string lang){
+if(lang=="tr")
+{
+    return Html.Raw(item.ContextTr);
+}
+else
+{
+    return Html.Raw(item.ContextEn);
+}
+}
+public string GetPageName(Inhouse.Models.Page item, string lang)
+{
+    if (lang == "tr")
+    {
+        return item.PageNameTr;
+    }
+    else
+    {
+        return item.PageNameEn;
+    }
+}
+}
+ <div class="descption-box">
+                <p class="descption-box-header">@GetPageName(Model,lang)</p>
+            </div>
+<div id="page_menu" class="clear-fix">
+<ul>
+@foreach (var item in childPages)
+{
+ if(item.PageId==Model.PageId)
+ {
+<li id="current_page_menu">@GetPageName(item,lang)</li>
+ }else
+ {
+ <li class="main_li">    
+ @(Html.ActionLink<PageController>(x=>x.Index(lang,item.PageId,GetPageName(item,lang).ConvertWebUrl()),GetPageName(item,lang)))    
+ </li>
+ }
+    
+}
+</ul>
+</div>
+<div style="clear:both"></div>
+<div class="point-point"></div>
+<div style="margin-top:20px;margin-bottom:20px;">
+@Html.Raw(GetData(Model,lang))
+</div>

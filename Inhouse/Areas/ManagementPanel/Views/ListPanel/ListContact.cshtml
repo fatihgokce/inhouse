@@ -1,0 +1,61 @@
+﻿@using Inhouse.Models;
+@using Inhouse.Repositorys;
+@{
+    ViewBag.Title = "ListContact";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>ListContact</h2>
+
+ <div id="main_content">  
+    <div id="admin_header">
+    	<div class="admin_index_title">İletişim</div>        
+        
+    
+    </div>
+    <div id="admin_header_border"></div>   
+ @using (Html.BeginForm())
+ { 	
+ <div class="grid">
+ 
+                <table cellspacing="0" cellpadding="0" id="tbusers">
+                    <tr>                   	
+                        <th style="width:5px;"><a href="#" class="pink">Ad Soyad</a></th>
+                        <th style="width:20px;"><a href="#" class="pink">E-Posta</a></th>   
+                        <th style="width:20px;"><a href="#" class="pink">Telefon</a></th>                                               
+                          <th style="width:20px;"><a href="#" class="pink">Tarih</a></th>   
+                          <th style="width:20px;"><a href="#" class="pink">Mesaj</a></th>                                           
+                       
+                                      
+                    </tr>
+                    @{ 
+                        int i = 1;
+                        RepositoryMessage _repCareer = new RepositoryMessage();
+                        var _lists = _repCareer.GetAll();
+                     }
+                   @foreach (var item in _lists) {  
+                    string cssClass = "";
+                    if (i % 2 == 1)
+                    { cssClass = "odd"; }
+                    else
+                    {
+                        cssClass = "even";
+                        i++;
+                    }
+                    
+                    <tr class="@cssClass">
+                      <td>@item.NameSurname</td>
+                      <td>@item.Mail</td>                       
+                       <td>@item.Phone</td>   
+                                                    
+                       <td>@item.AddedDate.ToString()</td>  
+                          <td>@item.Mesaj</td>  
+                                 
+                    </tr>			
+                    }           
+                                                                                                                 
+                </table>
+       
+        </div>      
+        }       
+	</div>

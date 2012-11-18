@@ -1,0 +1,91 @@
+﻿@model Inhouse.Models.Page
+@using Inhouse.Models;
+@using Inhouse.Areas.ManagementPanel.Controllers;
+@using Inhouse.Repositorys;
+@using Microsoft.Web.Mvc;
+@using Inhouse.Helpers;
+@using System.Web.Mvc;
+@{
+    ViewBag.Title = "ListPage";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+ @{ 
+
+RepositoryPage _repPage = new RepositoryPage();                       
+var _pages = _repPage.GetAll();
+var root = _repPage.GetRootPage();
+ }
+ <div style="padding:5px;">
+      @(Html.ActionLink<PagePanelController>(c => c.NewPage(), "Yeni Sayfa"))
+   </div>
+ <form action="@Url.Action("Delete",new{id=""})" method="post">
+ @Html.WritePages(root)
+ </form>
+ 
+
+ 
+   <script type="text/javascript" >
+    jQuery(document).ready(function () {
+      $(".yeniKayit").click(function () {
+            yeniKayit();
+            showForm();
+        });
+        $(".kapatForm").click(function () {
+            yeniKayit();
+            $("#catForm").css("display", "none");
+        }); 
+    });
+    function showForm()
+    {
+   
+       $("#catForm").css("display", "block");
+    }
+     function yeniKayit() {      
+        $("#CatName").val("");
+        $("#selectedCategory").val("");
+       
+    }
+    function setCategory(d,name)
+    {
+   
+     $("#selectedCategory").val(d);
+      $("#CatName").val(name);
+    }
+     function MakeSelectedSelect(selectedValue) {
+
+        $("#ParentCategory option").each(function () {
+
+            //   alert($(this).val());
+            if ($(this).val() == selectedValue) {
+
+                $(this).attr('selected', 'selected');
+            }
+        });
+    }
+    function DeletePage(catId) {
+       
+        var result = confirm("Silmek istediğinizden eminmisiniz?");
+        if (result) {
+            //alert(ary);
+            var url= "@Url.Action("Delete",new{id=""})";
+            url=url+"/"+catId;
+             submitform(url);
+            //alert(url);
+//            $.post(url, { id: catId }, function (data) {
+//                if (data.Success == true) {
+//                    submitform(url);
+//                }
+//                else {
+//                    alert("Error: " + obj.Message);
+//                }
+//            });
+        }
+
+    }
+    function submitform(url) {
+    document.forms[0].action=url;
+        document.forms[0].submit();
+    }
+    
+    </script>
+

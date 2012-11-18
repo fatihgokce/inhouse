@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+@*<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1254"> 
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-9"> *@
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+     <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+       <link href="/Content/admin.css" rel="stylesheet" type="text/css" />
+   @* <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>*@
+   @* <link href="/Content/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet"
+        type="text/css" /> 
+    <script src="/Scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>  *@
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/modernizr-2.5.3.js"></script>
+    <link href="/Plugins/tagit/jquery.tagit.css" rel="stylesheet" type="text/css" />
+    <script src="/Plugins/tagit/tag-it.js" type="text/javascript"></script>
+ <script type="text/javascript">
+     $(document).ready(function () {
+         var controller = '@ViewContext.RouteData.Values["controller"]';
+         var action = '@ViewContext.RouteData.Values["action"]';
+         //alert(controller+"-"+action);
+         var contAct = controller + "/" + action;
+         $(".tabs").find("a").each(function () {
+             var controllerMatch = $(this).attr("name");
+
+             if (controllerMatch == contAct) {
+                 $(this).parent("li").attr("class", "current");
+             }
+         });
+     });
+    </script>
+  @RenderSection("css",false)
+</head>
+<body>
+   <div id="container">	
+	<div id="header">
+		<span style="float:left"><h1>Site Administration</h1></span>
+        <span style="float:right;padding:5px;">
+        <a href="/">AnaSayfa</a>
+        </span>            
+	</div>  
+<div class="tabs"> 
+<ul>
+
+<li><a href="/ManagementPanel/PagePanel/ListPage" name="PagePanel/ListPage"><span>Sayfa</span></a></li>
+<li><a href="/ManagementPanel/ProjePanel/ListProje" name="ProjePanel/ListProje"><span>Projeler</span></a></li>
+<li><a href="/ManagementPanel/PanelSetting/Setting" name="PanelSetting/Setting"><span>Ayarlar</span></a></li>
+<li><a href="/ManagementPanel/PanelLabel/ListLabel" name="PanelLabel/ListLabel"><span>Sayfa Değerleri</span></a></li>
+<li><a href="/ManagementPanel/ListPanel/ListKariyer" name="ListPanel/ListKariyer"><span>Liste Kariyer</span></a></li>
+<li><a href="/ManagementPanel/ListPanel/ListContact" name="ListPanel/ListContact"><span>Mesajlar</span></a></li>
+<li><a href="/ManagementPanel/SpotPanel/ListSpot" name="SpotPanel/ListSpot"><span>Spot</span></a></li>
+<li><a href="/ManagementPanel/UploadPanel/ListUpload" name="UploadPanel/ListUpload"><span>Upload</span></a></li>
+</ul>
+    </div>
+    <div id="main">
+	 	 <span class="success">@(TempData["Success"] == null ? "" : @Html.Encode(TempData["Success"]))</span>
+		 <span class="error">@(TempData["Error"] == null ? "" : @Html.Encode(TempData["Error"]))</span>
+	    @RenderBody()
+    </div>
+   @* <div id="footer"><%=Html.SiteName() %></div>*@
+</div>
+    <div>       
+    </div>
+    
+</body>
+</html>

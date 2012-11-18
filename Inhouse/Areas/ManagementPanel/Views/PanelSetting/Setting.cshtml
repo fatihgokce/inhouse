@@ -1,0 +1,136 @@
+﻿@model Inhouse.Models.SettingsModel
+@using Inhouse.Models;
+@using Inhouse.Repositorys;
+@using Inhouse.Helpers;
+@using System.Web.Mvc;
+@using Microsoft.Web.Mvc;
+@using Inhouse.Areas.ManagementPanel.Controllers;
+@{
+    ViewBag.Title = "Setting";
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+ <script type="text/javascript">
+     $(document).ready(function () {
+         toggleState($("#smtpCredentials"), $("#SMTPAuthentication").checked);
+
+         $("#SMTPAuthentication").change(function () {
+             var vis = $(this).attr("checked");
+             toggleState(vis);
+         });
+
+     });
+
+     function toggleState(visible) {
+         if (!visible) {
+             $("#SMTPUsername").val("").attr("disabled", true);
+             $("#SMTPPassword").val("").attr("disabled", true);
+         }
+         else {
+             $("#SMTPUsername").attr("disabled", false);
+             $("#SMTPPassword").attr("disabled", false);
+         }
+     }
+
+ 
+	</script>
+<div id="admin_header">
+    	<div class="admin_index_title">Ayarlar</div>        
+        
+    
+    </div>
+  @using (Html.MultipartForm())
+  {
+        <fieldset>
+			<div class="heading">Genel Ayarlar</div>
+            <ul>
+				@*<li>
+					<label>Site İsmi*</label>
+					<%= Html.TextBoxFor(model => model.SiteName) %>     
+            <%= Html.ValidationMessageFor(m => m.SiteName) %>           	
+				</li>*@           
+        
+      
+        <li>
+					<label>Meta Description</label>
+					@Html.TextBoxFor(model => model.MetaDescription, new { size = "50" })         
+				</li>
+        <li>
+					<label>Meta Keyboard</label>
+					@Html.TextBoxFor(model => model.MetaKeyboard, new { size = "50" })           
+				</li>
+                @*  <li>
+					<label>Üst Slogan Tr</label>
+					@Html.TextBoxFor(model => model.UstSloganTr, new { size = "50" })           
+				</li>
+                  <li>
+					<label>Üst Slogan En</label>
+					@Html.TextBoxFor(model => model.UstSloganEn, new { size = "50" })           
+				</li>
+                  <li>
+					<label>Üst Slogan De</label>
+					@Html.TextBoxFor(model => model.UstSloganDe, new { size = "50" })           
+				</li>
+                  <li>
+					<label>Alt Slogan Tr</label>
+					@Html.TextBoxFor(model => model.AltSloganTr, new { size = "50" })           
+				</li>
+                  <li>
+					<label>Alt Slogan En</label>
+					@Html.TextBoxFor(model => model.AltSloganEn, new { size = "50" })           
+				</li>
+                  <li>
+					<label>Alt Slogan De</label>
+					@Html.TextBoxFor(model => model.AltSloganDe, new { size = "50" })           
+				</li>*@
+			</ul>
+		</fieldset>
+      	<fieldset>
+			<div class="heading">Email Ayarları</div>
+			<ul>
+				<li>
+					<label>Kimden</label>
+					@Html.TextBoxFor(model => model.EmailAddress, new { size = 40 })
+				</li><li>
+					<label>Konu </label>
+					@Html.TextBoxFor(model => model.SubjectPrefix, new { size = 40 })
+				</li><li>
+					<label>SMTP Host</label>
+					@Html.TextBoxFor(model => model.SMTPHost)
+				</li><li>
+					<label>SMTP Port*</label>
+					@Html.TextBoxFor(model => model.SMTPPort, new { size = 3 }) 
+				</li><li>
+					<label>Seçenekler</label>
+					@Html.RadioButton("SMTPEncryption", "None", (Model.SMTPEncryption ?? "").Equals("None", StringComparison.CurrentCultureIgnoreCase)) No Encryption
+					@Html.RadioButton("SMTPEncryption", "SSL", (Model.SMTPEncryption ?? "").Equals("SSL", StringComparison.CurrentCultureIgnoreCase)) Use SSL Encryption					
+				</li><li>
+					<label></label>
+				@Html.CheckBoxFor(m => m.SMTPAuthentication)  Kullan
+					<fieldset style="width:290px;margin-left:200px" id="smtpCredentials">
+					<ul>
+						<li>
+							<label style="width:100px">SMTP kullanıcı adı</label>
+							@Html.TextBoxFor(model => model.SMTPUsername, new { style = "width:170px" })
+						</li><li>
+							<label style="width:100px">SMTP şifre</label>							
+                            @Html.Password("SMTPPassword", Model.SMTPPassword, new { style = "width:170px" })
+						</li>
+					</ul>		
+					</fieldset>							
+				</li>
+               
+			</ul>
+        </fieldset>
+      
+        <p><input type="submit" value="Kaydet"/><br /></p>
+  }
+  <script language="javascript" type="text/javascript">
+      function InitializeForm() {
+          toggleState($("#SMTPAuthentication").attr("checked"));
+          if ($("#RecordNumberInPage").val() == "0")
+              $("#RecordNumberInPage").val("");
+          if ($("#SMTPPort").val() == "0")
+              $("#SMTPPort").val("");
+      }
+      InitializeForm();
+    </script>

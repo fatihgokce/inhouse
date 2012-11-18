@@ -1,0 +1,263 @@
+﻿@model Inhouse.Models.Proje
+@using Inhouse.Models;
+@using Inhouse.Repositorys;
+@using Inhouse.Helpers;
+@using System.Web.Mvc;
+@using Microsoft.Web.Mvc;
+@using Inhouse.Areas.ManagementPanel.Controllers;
+@{
+    Layout = "~/Areas/ManagementPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+@section css{
+   <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+     <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script>
+    $(function() {
+        $( "#tabs" ).tabs();
+    });
+    </script>  
+    <style>
+        ul, ol
+        {
+            list-style-type:none !important;
+        }
+        .tab
+        {
+           overflow:scroll;
+           height:450px;
+        }
+    </style>
+}
+<h2>Yeni Proje</h2>
+@{
+    //RepositoryCategory _repCat = new RepositoryCategory();
+    //List<Category> listeCat = _repCat.GetAll();
+ }
+ <h2>@ViewBag.Title</h2>
+ @Html.ValidationSummary("lütfen hataları düzeltin ve tekrar deneyin.")
+  <div id="main_content">     
+    <div id="admin_header">
+    	<div class="admin_addoffer_title"></div>
+        
+        <div class="right_buttons">       	
+
+          <div class="right_button">
+          @(Html.ActionLink<ProjePanelController>(c => c.ListProje(null), "Proje AnaSayfa"))
+       
+          </div>
+        
+        </div>
+    
+    </div>
+    <div id="admin_header_border"></div>   
+<div id="haberForm" style="border:1px dotted #ccc;width:990px;">
+  <script src="/Scripts/MicrosoftAjax.js" type="text/javascript"></script>
+  <script src="/Scripts/MicrosoftMvcValidation.js" type="text/javascript"></script>
+
+ @using (Html.MultipartForm())
+     { 
+     <div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Temel Özellikler</a></li>
+        <li><a href="#tabs-2">Açıklamalar</a></li>
+        <li><a href="#tabs-3">Resimler</a></li>
+    </ul>
+
+   
+   
+ <div id="tabs-1" class="tab">
+ <ol>
+ <li>
+  @Html.HiddenFor(x=>x.ProjeId)
+  </li>
+   <li style="margin-bottom:5px;margin-top:5px">
+    <label>Proje Adi Tr * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.ProjeAdiTr)
+    @Html.ValidationMessageFor(x=>x.ProjeAdiTr)
+    </li>
+       <li style="margin-bottom:5px;margin-top:5px">
+    <label>Proje Adi En * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.ProjeAdiEn)
+    @Html.ValidationMessageFor(x=>x.ProjeAdiEn)
+    </li>
+       <li style="margin-bottom:5px;margin-top:5px">
+    <label>İl * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.Il)
+    @Html.ValidationMessageFor(x=>x.Il)
+    </li>
+  <li style="margin-bottom:5px;margin-top:5px">
+    <label>İlçe * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.Ilce)
+    @Html.ValidationMessageFor(x=>x.Ilce)
+    </li>
+      <li style="margin-bottom:5px;margin-top:5px">
+      <label>Blok Sayısı * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.BlokSayisi)
+    @Html.ValidationMessageFor(x=>x.BlokSayisi)
+    </li>
+ <li style="margin-bottom:5px;margin-top:5px">
+      <label>Daire Sayısı * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.DaireSayisi)
+    @Html.ValidationMessageFor(x=>x.DaireSayisi)
+    </li>
+ <li style="margin-bottom:5px;margin-top:5px">
+      <label>Inşaat Alanı * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.InsaatAlani)
+    @Html.ValidationMessageFor(x=>x.InsaatAlani)
+    </li>
+<li style="margin-bottom:5px;margin-top:5px">
+      <label>Fiyat Aralık * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.FiyatAralik)
+    @Html.ValidationMessageFor(x=>x.FiyatAralik)
+    </li>
+       <li style="margin-bottom:5px;margin-top:5px">
+      <label>Arazi Alanı * </label></li>
+      <li>   
+    @Html.TextBoxFor(x=>x.AraziAlani)
+    @Html.ValidationMessageFor(x=>x.AraziAlani)
+    </li>
+ </ol>
+ </div>
+<div id="tabs-2" class="tab">
+<ol>
+ <li style="margin-bottom:5px;margin-top:5px">
+    <label>Açıklama Tr * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.AciklamaTr, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.AciklamaTr)
+    </li>
+   <li style="margin-bottom:5px;margin-top:5px">
+    <label>Açıklama En * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.AciklamaEn, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.AciklamaEn)
+    </li>
+
+  <li style="margin-bottom:5px;margin-top:5px">
+    <label>VaziyetPlaniTr * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.VaziyetPlaniTr, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.VaziyetPlaniTr)
+    </li>
+      <li style="margin-bottom:5px;margin-top:5px">
+    <label>VaziyetPlaniEn * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.VaziyetPlaniEn, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.VaziyetPlaniEn)
+    </li>
+ 
+  <li style="margin-bottom:5px;margin-top:5px">
+    <label>Sosyal Etkinlik Tr * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.SosyalEtkinlikTr, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.SosyalEtkinlikTr)
+    </li>
+<li style="margin-bottom:5px;margin-top:5px">
+    <label>Sosyal Etkinlik En * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.SosyalEtkinlikEn, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.SosyalEtkinlikEn)
+    </li>
+      <li style="margin-bottom:5px;margin-top:5px">
+    <label>Lokasyon Tr * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.LokasyonTr, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.LokasyonTr)
+    </li>
+          <li style="margin-bottom:5px;margin-top:5px">
+    <label>Lokasyon En * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.LokasyonEn, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.LokasyonEn)
+    </li>
+
+      <li style="margin-bottom:5px;margin-top:5px">
+    <label>UlasimOzellik Tr * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.UlasimOzellikTr, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.UlasimOzellikTr)
+    </li>
+
+         <li style="margin-bottom:5px;margin-top:5px">
+    <label>UlasimOzellik En * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.UlasimOzellikEn, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.UlasimOzellikEn)
+    </li>
+ <li style="margin-bottom:5px;margin-top:5px">
+    <label>HaritaScript En * </label></li>
+  <li>   
+    @Html.TextAreaFor(x => x.HaritaScript, new { cols = "80", rows = "15"})
+    @Html.ValidationMessageFor(x=>x.HaritaScript)
+    </li>
+</ol>
+</div>
+ <div id="tabs-3" class="tab">
+ <ol>
+
+    <li style="margin-bottom:5px;margin-top:5px">
+    <label>Ürün Resimleri * </label></li>
+     <li>
+<input type="file" id="film_image1" name="film_image1" /> 
+@if (Model!=null && !string.IsNullOrEmpty(Model.PicturePath1))
+{
+<img src="@Model.PicturePath1" id="cat-pict1" alt="" width="202px" height="120px" />
+}
+ </li>   
+  <li>
+<input type="file" id="film_image2" name="film_image2" /> 
+@if (Model != null && !string.IsNullOrEmpty(Model.PicturePath2))
+{
+<img src="@Model.PicturePath2" id="cat-pict2" alt="" width="202px" height="120px" />
+}
+ </li>  
+  <li>
+<input type="file" id="film_image3" name="film_image3" /> 
+@if (Model != null && !string.IsNullOrEmpty(Model.PicturePath3))
+{
+<img src="@Model.PicturePath3" id="cat-pict3" alt="" width="202px" height="120px" />
+}
+ </li>   
+  <li>
+<input type="file" id="film_image4" name="film_image4" /> 
+@if (Model != null && !string.IsNullOrEmpty(Model.PicturePath4))
+{
+<img src="@Model.PicturePath4" id="cat-pict4" alt="" width="202px" height="120px" />
+}
+ </li>  
+  <li>
+<input type="file" id="film_image5" name="film_image5" /> 
+@if (Model != null && !string.IsNullOrEmpty(Model.PicturePath5))
+{
+<img src="@Model.PicturePath5" id="cat-pict5" alt="" width="202px" height="120px" />
+}
+ </li>
+  <li>
+<input type="file" id="film_image6" name="film_image6" /> 
+@if (Model != null && !string.IsNullOrEmpty(Model.PicturePath6))
+{
+<img src="@Model.PicturePath6" id="cat-pict6" alt="" width="202px" height="120px" />
+}
+ </li>                    
+ </ol>      
+ </div> 
+ 
+</div> 
+     <ul>
+    <li style="display:inline">
+    <input type="submit" value="Kaydet"  />
+    </li>
+  </ul>   
+     }
+  </div> 
+  </div>

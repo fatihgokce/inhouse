@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using ThinkGeo.MapSuite.Core;
+using ThinkGeo.MapSuite.WebEdition;
+
+namespace LoadTabFile
+{
+    public partial class _Default : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                offline();
+                //online();
+            }
+        }
+        void online() {
+            Map1.EditOverlay.Features.Clear();
+            Map1.CustomOverlays.Clear();
+            Map1.MapBackground.BackgroundBrush = new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"));
+            Map1.CurrentExtent = new RectangleShape(44.66, 41.97, 51.03, 38.37);
+            //Map1.RestrictedExtent = new RectangleShape(44.66, 41.97, 51.03, 38.37);
+            Map1.MapUnit = GeographyUnit.DecimalDegree;
+
+            WorldMapKitWmsWebOverlay worldMapKitOverlay = new WorldMapKitWmsWebOverlay();
+            Map1.CustomOverlays.Add(worldMapKitOverlay);
+            InMemoryMarkerOverlay markerOverlay = new InMemoryMarkerOverlay("marker1");
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.ContentHtml = "<p>cdsc</p>";
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.HasCloseButton = true;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.Width = 200;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.Height = 100;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.BackgroundColor = GeoColor.StandardColors.LightBlue;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.BorderColor = GeoColor.StandardColors.Black;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.BorderWidth = 1;
+            //markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageOffsetX = -10.5f;
+            //markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageOffsetY = -25f;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageWidth = 21;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageHeight = 25;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            //40.417678,48.893829
+            markerOverlay.Features.Add(new Feature(48.893829, 40.417678));
+
+            markerOverlay.IsVisible = true;
+
+            Map1.CustomOverlays.Add(markerOverlay);
+        }
+        void offline() {
+            Map1.MapUnit = GeographyUnit.Meter;
+            Map1.MapBackground.BackgroundBrush = new GeoSolidBrush(GeoColor.GeographicColors.Sand);    
+
+            //TabFeatureLayer.BuildIndexFile(@"C:\Users\ryandesemo.THINKGEO\Projects\ThinkGeo Customers\TTG\MapDataAzerbaijan\MapDataAzerbaijan\Administrtive_Boundary.TAB", BuildIndexMode.Rebuild);
+
+            //TabFeatureSource.BuildIndexFile(@"C:\Users\ryandesemo.THINKGEO\Projects\ThinkGeo Customers\TTG\MapDataAzerbaijan\MapDataAzerbaijan\Administrtive_Boundary.TAB",BuildIndexMode.DoNotRebuild);
+
+            //TabFeatureLayer worldLayer = new TabFeatureLayer(@"C:\Users\ryandesemo.THINKGEO\Projects\ThinkGeo Customers\TTG\MapDataAzerbaijan\MapDataAzerbaijan\Administrtive_Boundary.TAB");
+            TabFeatureLayer worldLayer = new TabFeatureLayer(MapPath(@"~/MapData/Administrtive_Boundary.TAB"));
+            worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(100, GeoColor.SimpleColors.Green), GeoColor.SimpleColors.Green);
+            worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            worldLayer.Open();
+            Map1.CurrentExtent = worldLayer.GetBoundingBox();
+            worldLayer.Close();
+
+            LayerOverlay staticOverlay = new LayerOverlay("StaticOverlay");
+            staticOverlay.IsBaseOverlay = true;
+            staticOverlay.Layers.Add(worldLayer);
+
+            Map1.CustomOverlays.Add(staticOverlay);
+            InMemoryMarkerOverlay markerOverlay = new InMemoryMarkerOverlay("marker1");
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.ContentHtml = "<p>cdsc</p>";
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.HasCloseButton = true;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.Width = 200;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.Height = 100;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.BackgroundColor = GeoColor.StandardColors.LightBlue;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.BorderColor = GeoColor.StandardColors.Black;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.Popup.BorderWidth = 1;
+            //markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageOffsetX = -10.5f;
+            //markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageOffsetY = -25f;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageWidth = 21;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageHeight = 25;
+            markerOverlay.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;          
+            markerOverlay.Features.Add(new Feature(48.893829, 40.417678));
+            markerOverlay.IsVisible = true;
+            Map1.CustomOverlays.Add(markerOverlay);
+        }
+    }
+}
