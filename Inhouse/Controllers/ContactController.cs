@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Inhouse.Helpers;
 using Inhouse.Models;
 using Inhouse.Repositorys;
 namespace Inhouse.Controllers
@@ -33,6 +34,7 @@ namespace Inhouse.Controllers
                 Mesaj = frm["message"]
                 
             };
+
             RepositoryMessage repContact = new RepositoryMessage();
             repContact.Insert(message);
             RepositoryLabel repLabel = new RepositoryLabel();
@@ -43,8 +45,15 @@ namespace Inhouse.Controllers
             else
                 messageContact = label.ValueEn;
             TempData["succedd"] = messageContact;
+
+            Global.SendMail(new Contact 
+            { 
+                NameSurname=message.NameSurname,
+                Mail=message.Mail
+            },message.Mesaj);
             return RedirectToAction("Succeed", "Home", new { lang = lang });
         }
+       
 
     }
 }

@@ -51,7 +51,7 @@ namespace Inhouse.Repositorys
                 object val = ExecuteScalar("select Value from Setting where Key='{0}' ".With(key));
                 if (val != null)
                 {
-                    if (val.ToString().Trim() != value.Trim())
+                    if (value!=null && val.ToString().Trim() != value.Trim())
                     {
                         string sql = "PRAGMA journal_mode = OFF;update Setting set Value='{0}' where Key='{1}'".With(value, key);
                         ExecuteNonQuery(sql);

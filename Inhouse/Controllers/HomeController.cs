@@ -34,6 +34,7 @@ namespace Inhouse.Controllers
         public ActionResult Succeed(string lang)
         {
             ViewBag.Title = "Inhouse";
+            AssignLang(lang);
             return View();
         }
     }

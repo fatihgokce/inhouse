@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Inhouse.Models;
 using Inhouse.Repositorys;
 using Inhouse.Extensions;
+using Inhouse.Helpers;
 namespace Inhouse.Controllers
 {
     public class CareerController : BaseController
@@ -46,6 +47,11 @@ namespace Inhouse.Controllers
             else
                 message = label.ValueEn;
             TempData["succedd"] = message ;
+            Global.SendMail(new Contact
+            {
+                NameSurname = career.NameSurname,
+                Mail = career.Mail
+            }, career.Message);
             return RedirectToAction("Succeed", "Home", new { lang=lang});
         }
         string uploadFile()
