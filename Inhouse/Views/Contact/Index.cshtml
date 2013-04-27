@@ -8,9 +8,13 @@
  string lang=ViewBag.Lang as string;
  RepositoryLabel rep = new RepositoryLabel();
  Label lb = rep.GetByKey("ContactPhone");
+ Label lbemail = rep.GetByKey("ContactEmail");
+ string email = string.Empty;
 string tel=lb.ValueTr;
+email = lbemail.ValueTr;
  if(lang=="en"){
      tel = lb.ValueEn;
+     email = lbemail.ValueEn;     
  }
  }
  <div class="descption-box">
@@ -44,7 +48,7 @@ string tel=lb.ValueTr;
  </li>
  <li>
      <p class="conact-p">
-     ferguven@inhose.tc
+     @email
      </p>
  </li>
  </ul>
@@ -144,7 +148,7 @@ string tel=lb.ValueTr;
  </div>
      
      <div style="float:right;width:460px">     
-         <iframe width="458" height="315" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=tr&amp;geocode=&amp;q=cumhuriyet+mahallesi+1988+sokak+esenyurt+beylikd%C3%BCz%C3%BC+istanbul&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=48.287373,107.138672&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=Cumhuriyet+Cd,+Beylikd%C3%BCz%C3%BC,+T%C3%BCrkiye&amp;ll=41.00497,28.643503&amp;spn=0.020403,0.039225&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=tr&amp;geocode=&amp;q=cumhuriyet+mahallesi+1988+sokak+esenyurt+beylikd%C3%BCz%C3%BC+istanbul&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=48.287373,107.138672&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=Cumhuriyet+Cd,+Beylikd%C3%BCz%C3%BC,+T%C3%BCrkiye&amp;ll=41.00497,28.643503&amp;spn=0.020403,0.039225&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">Daha Büyük Görüntüle</a></small>
+         <iframe width="458" height="315" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps/ms?msa=0&amp;msid=205068485828664336622.0004db5d56730569ce680&amp;ie=UTF8&amp;ll=41.08298,29.036254&amp;spn=0.000018,0.0007&amp;t=h&amp;iwloc=0004db5d64daaf0eee1f6&amp;output=embed"></iframe><br /><small>Şunu daha büyük bir haritada görüntüle: <a href="https://maps.google.com/maps/ms?msa=0&amp;msid=205068485828664336622.0004db5d56730569ce680&amp;ie=UTF8&amp;ll=41.08298,29.036254&amp;spn=0.000018,0.0007&amp;t=h&amp;iwloc=0004db5d64daaf0eee1f6&amp;source=embed" style="color:#0000FF;text-align:left">inhouse</a></small>
     </div>
 </div>
 <script>
