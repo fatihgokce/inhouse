@@ -11,10 +11,10 @@
  Label lbemail = rep.GetByKey("ContactEmail");
  string email = string.Empty;
 string tel=lb.ValueTr;
-email = lbemail.ValueTr;
+email = lbemail.ValueTr.Replace("@@","@");
  if(lang=="en"){
      tel = lb.ValueEn;
-     email = lbemail.ValueEn;     
+     email = lbemail.ValueEn.Replace("@@","@");     
  }
  }
  <div class="descption-box">

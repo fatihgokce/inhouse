@@ -82,8 +82,8 @@
                     
                     <tr class="@cssClass">
                       <td>@item.Key</td>
-                      <td>@item.ValueTr</td>                       
-                       <td>@item.ValueEn</td>    
+                      <td>@item.ValueTr.Replace("@@","@")</td>                       
+                       <td>@item.ValueEn.Replace("@@","@")</td>    
                         <td>     
                           <a href="javascript:void(0)" class="guncelle">Güncelle</a>
                          <a href="javascript:void(0)" class="delete">Sil</a>
